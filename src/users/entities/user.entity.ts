@@ -1,8 +1,10 @@
+import { Transaction } from 'src/transactions/entities/transaction.entity';
 import {
   BeforeInsert,
   BeforeUpdate,
   Column,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -26,6 +28,9 @@ export class User {
     select: false,
   })
   password: string;
+  
+  @OneToMany(() => Transaction, (transaction) => transaction.user)
+  transactions: Transaction[]
 
   @BeforeInsert()
   @BeforeUpdate()
